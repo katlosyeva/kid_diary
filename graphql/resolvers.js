@@ -131,7 +131,37 @@ module.exports = {
     await searchedBaby.save();
     
     return {
-       ... searchedBaby._doc, _id: searchedBaby._id.toString() 
+       ... addedSkill._doc, _id: addedSkill._id.toString() 
+   
+    };
+  },
+  addWord: async function({ _id, word, date }, req) {
+    if (!req.isAuth) {
+      const error = new Error('Not authenticated!');
+      error.code = 401;
+      throw error;
+    }
+    const errors = [];
+    console.log(req)
+    const searchedBaby = await Baby.findById(_id).populate('words');
+    if (!searchedBaby) {
+      const error = new Error('Invalid baby.');
+      error.code = 401;
+      throw error;
+    }
+    const newWord = new Word({
+      word,
+      date
+    });
+    const addedWord = await newWord.save();
+   
+   
+    searchedBaby.words.push(addedWord);
+    
+    await searchedBaby.save();
+    
+    return {
+       ... addedWord._doc, _id: addedWord._id.toString() 
    
     };
   },
@@ -163,7 +193,6 @@ module.exports = {
       error.code = 401;
       throw error;
     }
-    
     
     return {
        skills: searchedBaby.skills.map(skill=>{return {

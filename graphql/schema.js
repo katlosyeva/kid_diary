@@ -52,9 +52,8 @@ module.exports = buildSchema(`
     type Mutation {
         createUser(userInput: UserInputData): User!
         addBaby(name:String!): Baby!
-        addSkill(date:String!, skill:String!, _id: String!): Baby!
-        
-        addWord(date:String!, word:String!): Word!
+        addSkill(date:String!, skill:String!, _id: String!): Skill!
+        addWord(date:String!, word:String!, _id: String!): Word!
     }
 
     type Query {

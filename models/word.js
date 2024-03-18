@@ -10,11 +10,7 @@ const wordSchema = new Schema({
         type: String,
         required: true
       },
-      baby_owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'Baby',
-        required: true
-      }
+ 
 });
 
 module.exports = mongoose.model('Word', wordSchema);
