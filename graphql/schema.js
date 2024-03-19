@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
 
@@ -48,6 +48,9 @@ module.exports = buildSchema(`
     type SkillsData {
         skills: [Skill!]!
     }
+    type WordsData {
+        words: [Word!]!
+    }
 
     type Mutation {
         createUser(userInput: UserInputData): User!
@@ -59,5 +62,6 @@ module.exports = buildSchema(`
     type Query {
         login(email: String!, password: String!): AuthData!
         getSkills(_id:String!): SkillsData!
+        getWords(_id: String!): WordsData!
       }
 `);
